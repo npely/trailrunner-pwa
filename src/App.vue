@@ -128,22 +128,6 @@ body {
   background-size: cover;
 }
 
-.move-button {
-  color: white;
-  border: 3px solid white;
-  text-shadow: none;
-  font-size: 30px;
-  background: rgba(34, 34, 34, 0.75);
-  text-align: center;
-  width: fit-content;
-  text-shadow: 0 -1px 0 #000, 0 1px 0 #999999, 0 2px 0 #888888, 0 3px 0 #777777,
-    0 4px 0 #666666;
-}
-
-.move-button:hover {
-  transform: translate(0px, 5px);
-}
-
 #level-logo {
   width: 30px;
   height: 30px;
@@ -171,13 +155,6 @@ body {
 .control-panel {
   margin-top: 54px;
   float: top;
-}
-
-#move-button-group {
-  text-align: center;
-  font-family: "Press Start P2", serif;
-  padding-top: 20px;
-  margin: auto;
 }
 
 .game-field {
@@ -298,7 +275,7 @@ body {
     font-size: 50px;
   }
 
-  #move-button {
+  .move-button {
     font-size: 20px;
   }
 
@@ -367,7 +344,7 @@ body {
     height: 300px;
   }
 
-  #move-button {
+  .move-button {
     font-size: 10px;
     border: 2px solid white;
   }

@@ -28,6 +28,11 @@ const routes = [
     path: "/sandbox",
     name: "Sandbox",
     component: () => import("../views/Sandbox")
+  },
+  {
+    path: "/game",
+    name: "Game",
+    component: () => import("../views/TrailRunner")
   }
 ];
 

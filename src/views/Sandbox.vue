@@ -234,7 +234,6 @@ export default {
       let parent = ev.target.parentNode;
       parent.removeChild(target);
       let image = document.createElement("img");
-      //temporal work-around
       image.src = data;
       image.classList.add("game-field");
       image.addEventListener("drop", this.drop);
@@ -260,7 +259,6 @@ export default {
         let imageHolder = document.createElement("div");
         imageHolder.id = "imgHolder-" + xy;
         let image = document.createElement("img");
-        //temporal work-around
         image.src = require("@/assets/images/fields/Wall.png");
         image.classList.add("game-field");
         image.id = "img-" + xy;
