@@ -14,8 +14,6 @@ export default new Vuex.Store({
   },
   actions: {
     async fetchLevel({ commit }, { levelId }) {
-      console.log(levelId);
-      console.log(process.env.VUE_APP_BACKEND_BASE_URL);
       await fetch(process.env.VUE_APP_BACKEND_BASE_URL + "/level/" + levelId, {
         method: "GET",
         credentials: "same-origin"
@@ -25,7 +23,6 @@ export default new Vuex.Store({
         credentials: "same-origin"
       }).then(async function(response) {
         const levelMap = await response.json();
-        console.log(levelMap);
         commit("levelMap", levelMap);
       });
     }

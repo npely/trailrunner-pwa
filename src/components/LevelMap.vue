@@ -4,19 +4,18 @@
 
 <script>
 import { mapGetters } from "vuex";
-import $ from "jquery";
 
 export default {
   name: "LevelMap",
   methods: {
     buildField: function(parent, fieldValue, fieldType, xy, isPlayerOnField) {
-      let image = $(`#img-${xy}`);
-      //temporal work-around
-      image.attr(
-        "src",
-        "@/assets/" +
-          this.setFieldImage(parent, fieldValue, fieldType, isPlayerOnField)
-      );
+      let image = document.createElement("img");
+      image.src = require("@/assets/" +
+        this.setFieldImage(parent, fieldValue, fieldType, isPlayerOnField));
+      image.classList.add("game-field");
+      image.id = "img-" + xy + isPlayerOnField;
+      parent.append(image);
+      console.log("IM HERE");
     },
     setFieldImage: function(parent, fieldValue, fieldType, isPlayerOnField) {
       let myPicture = "images/fields/";
@@ -35,18 +34,20 @@ export default {
   computed: {
     ...mapGetters(["levelMap"])
   },
-  created: function() {
-    console.log(this.levelMap);
-    let parent = $("#level-map");
+  mounted: function() {
+    let parent = document.getElementById("level-map");
     for (let x = 0; x < 10; x++) {
-      let row = $(
-        `<div class="row justify-content-center" id="row-${x.toString()}"></div>`
-      );
+      let row = document.createElement("div");
+      row.classList.add("row");
+      row.classList.add("justify-content-center");
+      row.id = "row-" + x.toString();
       parent.append(row);
       for (let y = 0; y < 10; y++) {
-        let col = $(`<div class="col no-padding" id="col-${x},${y}"></div>`);
+        let col = document.createElement("div");
+        col.classList.add("col");
+        col.classList.add("no-padding");
+        col.id = "col-" + x + "," + y;
         row.append(col);
-        parent.html();
         let field = this.levelMap.fields[x * 10 + y];
         let xy = x.toString() + y.toString();
         this.buildField(
