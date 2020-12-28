@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     levelMap: {},
-    changedFields: {}
+    changedFields: {},
+    lastDirection: ""
   },
   getters: {
     levelMap: currentState => {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     changedFields: currentState => {
       return currentState.changedFields;
+    },
+    lastDirection: currentState => {
+      return currentState.lastDirection;
     }
   },
   actions: {
@@ -48,6 +52,7 @@ export default new Vuex.Store({
         }
       ).then(async function(response) {
         const changedFields = await response.json();
+        commit("lastDirection", moveDirection);
         commit("changedFields", changedFields);
       });
     }
@@ -58,6 +63,9 @@ export default new Vuex.Store({
     },
     changedFields(state, changedFields) {
       state.changedFields = changedFields;
+    },
+    lastDirection(state, direction) {
+      state.lastDirection = direction;
     }
   }
 });

@@ -33,6 +33,16 @@ const routes = [
     path: "/game",
     name: "Game",
     component: () => import("../views/TrailRunner")
+  },
+  {
+    path: "/lose",
+    name: "Lose",
+    component: () => import("../views/LoseScreen")
+  },
+  {
+    path: "/win",
+    name: "Win",
+    component: () => import("../views/WinScreen")
   }
 ];
 

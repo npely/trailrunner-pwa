@@ -48,18 +48,18 @@
     <LevelMap></LevelMap>
     <div id="move-button-group">
       <div class="row">
-        <button class="move-button" onclick="moveUp()" type="submit">
+        <button class="move-button" onclick="move('up')" type="submit">
           &#x2191;
         </button>
       </div>
       <div class="btn-group" role="group">
-        <button class="move-button" onclick="moveLeft()" type="submit">
+        <button class="move-button" onclick="move('left')" type="submit">
           &#x2190;
         </button>
-        <button class="move-button" onclick="moveDown()" type="submit">
+        <button class="move-button" onclick="move('down')" type="submit">
           &#x2193;
         </button>
-        <button class="move-button" onclick="moveRight()" type="submit">
+        <button class="move-button" onclick="move('right')" type="submit">
           &#x2192;
         </button>
       </div>
@@ -69,14 +69,15 @@
 
 <script>
 import LevelMap from "@/components/LevelMap";
+import {mapActions, mapGetters} from "vuex";
 export default {
   name: "TrailRunner",
   components: { LevelMap },
   methods: {
-    moveUp: function() {},
-    moveLeft: function() {},
-    moveDown: function() {},
-    moveRight: function() {},
+    ...mapActions(["makeMove"]),
+    move: function(direction) {
+      this.makeMove({ direction });
+    },
     switchHardcoreMode: function() {},
     saveGame: function() {},
     redoMove: function() {},

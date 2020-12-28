@@ -3,11 +3,91 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "LevelMap",
   methods: {
+    ...mapActions(["makeMove"]),
+    moveUpdate: function () {
+      let isSliding = ((this.changedFields.newPlayerField.fieldtype === "Ice") && (this.changedFields.newPlayerField.fieldvalue >= 0));
+      console.log(this.changedFields);
+      let newPlayerField = document.getElementById(`col-${this.changedFields.newPlayerY},${this.changedFields.newPlayerX}`);
+      let oldPlayerField = document.getElementById(`col-${this.changedFields.PlayerY},${this.changedFields.PlayerX}`);
+      let doorFieldCol = document.getElementById(`col-${this.changedFields.doorY},${this.changedFields.doorX}`);
+      if (this.changedFields.newPlayerField.fieldvalue === -1) {
+        this.updateField(
+            oldPlayerField,
+            this.changedFields.playerField.fieldvalue,
+            this.changedFields.playerField.fieldtype,
+            this.changedFields.playerY.toString() + this.changedFields.playerX.toString(),
+            false);
+        this.updateField(
+            newPlayerField,
+            this.changedFields.newPlayerField.fieldvalue,
+            this.changedFields.newPlayerField.fieldtype,
+            this.changedFields.newPlayerY.toString() + this.changedFields.newPlayerX.toString(),
+            true);
+        setTimeout(function () {
+          this.$router.push("lose");
+        }, 400);
+        return null;
+      } else if (this.changedFields.newPlayerField.fieldvalue === 9 || this.changedFields.newPlayerField.fieldvalue === 19) {
+        this.updateField(
+            oldPlayerField,
+            this.changedFields.playerField.fieldvalue,
+            this.changedFields.playerField.fieldtype,
+            this.changedFields.playerY.toString() + this.changedFields.playerX.toString(),
+            false);
+        this.updateField(
+            doorFieldCol,
+            this.changedFields.newPlayerField.fieldvalue,
+            "Door",
+            this.changedFields.doorY.toString() + this.changedFields.doorX.toString(),
+            true);
+        setTimeout(function () {
+          this.$router.push("win");
+        }, 400);
+        return null;
+      } else {
+        this.updateField(newPlayerField,
+            this.changedFields.newPlayerField.fieldvalue,
+            this.changedFields.newPlayerField.fieldtype,
+            this.changedFields.newPlayerY.toString() + this.changedFields.newPlayerX.toString(),
+            true);
+      }
+      this.updateField(
+          oldPlayerField,
+          this.changedFields.playerField.fieldvalue,
+          this.changedFields.playerField.fieldtype,
+          this.changedFields.playerY.toString() + this.changedFields.playerX.toString(),
+          false);
+      if (this.changedFields.levelFieldSum === 0) {
+        this.updateField(
+            doorFieldCol,
+            this.changedFields.doorField.fieldvalue,
+            this.changedFields.doorField.fieldtype,
+            this.changedFields.doorY.toString() + this.changedFields.doorX.toString(),
+            false);
+      } else {
+        this.updateField(
+            doorFieldCol,
+            this.changedFields.doorField.fieldvalue,
+            this.changedFields.doorField.fieldtype,
+            this.changedFields.doorY.toString() + this.changedFields.doorX.toString(),
+            false);
+      }
+      if (isSliding) {
+        setTimeout(function () {
+          this.makeMove( this.lastDirection );
+        }, 50);
+      }
+    },
+    updateField: function (parent, fieldValue, fieldType, xy, isPlayerOnField) {
+      let image = document.getElementById(`img-${xy}`);
+      image.src = require("@/assets/" +
+          this.setFieldImage(parent, fieldValue, fieldType, isPlayerOnField));
+    },
     buildField: function(parent, fieldValue, fieldType, xy, isPlayerOnField) {
       let image = document.createElement("img");
       image.src = require("@/assets/" +
@@ -15,7 +95,6 @@ export default {
       image.classList.add("game-field");
       image.id = "img-" + xy + isPlayerOnField;
       parent.append(image);
-      console.log("IM HERE");
     },
     setFieldImage: function(parent, fieldValue, fieldType, isPlayerOnField) {
       let myPicture = "images/fields/";
@@ -32,7 +111,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["levelMap"])
+    ...mapGetters(["levelMap", "changedFields", "lastDirection"])
+  },
+  watch: {
+    changedFields: function() {
+      this.moveUpdate();
+    }
   },
   mounted: function() {
     let parent = document.getElementById("level-map");
