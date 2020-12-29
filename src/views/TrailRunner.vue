@@ -10,38 +10,40 @@
         @click="saveGame()"
         data-toggle="tooltip"
         title="Save the game"
-        type="submit"
       >
         &#x1F4BE;
+      </button>
+      <button
+        id="hardcore-button"
+        class="nav-button"
+        @click="hardcoreModeToggle()"
+      >
+        &#x1f47c;
       </button>
       <button
         class="nav-button"
         @click="$router.push('/')"
         data-toggle="tooltip"
         title="Go back to main menu"
-        type="submit"
       >
         &#x1F6AA;
-      </button>
-      <button class="nav-button" onclick="switchHardcoreMode()" type="submit">
-        &#x1f47c;
       </button>
     </div>
     <LevelMap></LevelMap>
     <div id="move-button-group">
       <div class="row">
-        <button class="move-button" @click="walk('up')" type="submit">
+        <button class="move-button" @click="walk('up')">
           &#x2191;
         </button>
       </div>
       <div class="btn-group" role="group">
-        <button class="move-button" @click="walk('left')" type="submit">
+        <button class="move-button" @click="walk('left')">
           &#x2190;
         </button>
-        <button class="move-button" @click="walk('down')" type="submit">
+        <button class="move-button" @click="walk('down')">
           &#x2193;
         </button>
-        <button class="move-button" @click="walk('right')" type="submit">
+        <button class="move-button" @click="walk('right')">
           &#x2192;
         </button>
       </div>
@@ -51,7 +53,7 @@
 
 <script>
 import LevelMap from "@/components/LevelMap";
-import {mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "TrailRunner",
   components: { LevelMap },
@@ -60,13 +62,15 @@ export default {
     walk: function(moveDirection) {
       this.makeMove({ moveDirection });
     },
-    switchHardcoreMode: function() {
+    hardcoreModeToggle: function() {
       this.switchHardcoreMode();
+      console.log("switch Hardcore Mode");
+      console.log(this.hardcoreMode);
       let hardcoreButton = document.getElementById("hardcore-button");
-      if (this.hardcoreMode) {
-        hardcoreButton.text(String.fromCodePoint(parseInt("128128")))
+      if (this.hardcoreMode.hardcoreMode) {
+        hardcoreButton.innerHTML = String.fromCodePoint(parseInt("128128"));
       } else {
-        hardcoreButton.text(String.fromCodePoint(parseInt("128124")))
+        hardcoreButton.innerHTML = String.fromCodePoint(parseInt("128124"));
       }
     },
     saveGame: function() {

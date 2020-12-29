@@ -129,6 +129,7 @@ export default {
         if (fieldType === "Door" || !isPlayerOnField) {
           myPicture += fieldType + "_" + fieldValue + ".png";
         } else {
+          console.log("is player field");
           myPicture += fieldType + "_" + fieldValue + "_P.png";
         }
       } else {
@@ -161,6 +162,16 @@ export default {
         row.append(col);
         let field = this.levelMap.fields[x * 10 + y];
         let xy = x.toString() + y.toString();
+        console.log(
+          "PxPos " +
+            this.levelMap.level.PxPos +
+            " PyPos " +
+            this.levelMap.level.PyPos
+        );
+        console.log(x + " " + y);
+        console.log(
+          this.levelMap.level.PxPos === y && this.levelMap.level.PyPos === x
+        );
         this.buildField(
           col,
           field.fieldvalue,

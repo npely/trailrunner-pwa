@@ -13,7 +13,7 @@
             <button
               class="nav-button"
               data-toggle="tooltip"
-              onclick="saveCustomLevel()"
+              @click="saveCustomLevel()"
               title="Save your level"
             >
               &#x1F4BE;
@@ -21,7 +21,7 @@
             <button
               class="nav-button"
               data-toggle="tooltip"
-              onclick="playCustomLevel()"
+              @click="playCustomLevel()"
               title="Play your level"
             >
               &#x25B6;
@@ -216,55 +216,55 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Sandbox",
   methods: {
     ...mapActions(["postCustomGame"]),
     playCustomLevel: function() {
-      let type = "Wall"
-      let value = -99
-      let pXPos = 0
-      let pYPos = 0
-      let dXPos = 0
-      let dYPos = 0
+      let type = "Wall";
+      let value = -99;
+      let pXPos = 0;
+      let pYPos = 0;
+      let dXPos = 0;
+      let dYPos = 0;
 
-      let fields = []
+      let fields = [];
 
       for (let x = 0; x < 10; x++) {
         for (let y = 0; y < 10; y++) {
-          let kids = document.getElementById('imgHolder-${x}${y}').children;
-          let image = kids[0]
-          let uri = image.src.toString().split("/")
-          let source = uri[uri.length - 1]
-          let name = source.split(".")
-          let params = name[0].split("_")
+          let kids = document.getElementById(`imgHolder-${x}${y}`).children;
+          let image = kids[0];
+          let uri = image.src.toString().split("/");
+          let source = uri[uri.length - 1];
+          let name = source.split(".");
+          let params = name[0].split("_");
           if (params.length > 1) {
-            type = params[0]
-            console.log(type)
-            value = params[1]
-            console.log(value)
+            type = params[0];
+            console.log(type);
+            value = parseInt(params[1]);
+            console.log(value);
             if (type === "Door") {
-              dXPos = x
-              dYPos = y
+              dXPos = x;
+              dYPos = y;
             }
           } else {
-            type = "Wall"
-            value = -99
+            type = "Wall";
+            value = -99;
           }
           fields.push({
             fieldvalue: value,
             fieldtype: type
-          })
+          });
           if (params.length > 2) {
-            pXPos = x
-            pYPos = y
+            pXPos = x;
+            pYPos = y;
           }
         }
       }
       let levelObj = {
-        name: "customLevel",
+        name: "CustomLevel",
         size: 10,
         PxPos: pXPos,
         PyPos: pYPos,
@@ -272,18 +272,15 @@ export default {
         DyPos: dYPos,
         WxPos: dXPos,
         WyPos: dYPos + 1
-      }
+      };
       let level = {
         level: levelObj,
         fields: fields
-      }
+      };
       console.log(level);
-      this.postCustomGame({level});
-      this.$router.push("/game");
+      this.postCustomGame({ level });
     },
-    saveCustomLevel: function() {
-
-    },
+    saveCustomLevel: function() {},
     allowDrop: function(ev) {
       ev.preventDefault();
     },
@@ -304,6 +301,14 @@ export default {
       image.addEventListener("drop", this.drop);
       image.addEventListener("dragover", this.allowDrop);
       parent.appendChild(image);
+    }
+  },
+  computed: {
+    ...mapGetters(["levelMap"])
+  },
+  watch: {
+    levelMap: function() {
+      this.$router.push("game");
     }
   },
   mounted: function() {

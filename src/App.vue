@@ -279,19 +279,7 @@ body {
     font-size: 20px;
   }
 
-  #save-button {
-    font-size: 15px;
-  }
-
-  #undo-button {
-    font-size: 15px;
-  }
-
-  #redo-button {
-    font-size: 15px;
-  }
-
-  #back-button {
+  .nav-button {
     font-size: 15px;
   }
 
@@ -357,19 +345,7 @@ body {
     margin: auto;
   }
 
-  #save-button {
-    font-size: 10px;
-  }
-
-  #undo-button {
-    font-size: 10px;
-  }
-
-  #redo-button {
-    font-size: 10px;
-  }
-
-  #back-button {
+  .nav-button {
     font-size: 10px;
   }
 

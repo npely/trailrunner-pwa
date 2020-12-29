@@ -8,7 +8,7 @@ export default new Vuex.Store({
     levelMap: {},
     changedFields: {},
     moveDirection: {},
-    hardcoreMode: {},
+    hardcoreMode: false
   },
   getters: {
     levelMap: currentState => {
@@ -57,15 +57,17 @@ export default new Vuex.Store({
       ).then(async function(response) {
         const changedFields = await response.json();
         commit("moveDirection", moveDirection);
-        console.log("Commit " + moveDirection);
         commit("changedFields", changedFields);
       });
     },
     async switchHardcoreMode({ commit }) {
-      await fetch(process.env.VUE_APP_BACKEND_BASE_URL + "/switchHardcoreMode", {
-        method: "GET",
-        credentials: "same-origin"
-      }).then(async function(response) {
+      await fetch(
+        process.env.VUE_APP_BACKEND_BASE_URL + "/switchHardcoreMode",
+        {
+          method: "GET",
+          credentials: "same-origin"
+        }
+      ).then(async function(response) {
         const hardcoreMode = await response.json();
         commit("hardcoreMode", hardcoreMode);
       });
@@ -86,9 +88,14 @@ export default new Vuex.Store({
       await fetch(process.env.VUE_APP_BACKEND_BASE_URL + "/loadCustomGame", {
         method: "POST",
         credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(level)
       }).then(async function() {
         commit("levelMap", level);
+        console.log("finished");
+        console.log(level);
       });
     }
   },
