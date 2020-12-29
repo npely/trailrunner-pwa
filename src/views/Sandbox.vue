@@ -13,6 +13,7 @@
             <button
               class="nav-button"
               data-toggle="tooltip"
+              onclick="saveCustomLevel()"
               title="Save your level"
             >
               &#x1F4BE;
@@ -20,7 +21,7 @@
             <button
               class="nav-button"
               data-toggle="tooltip"
-              onclick="loadCustomLevel()"
+              onclick="playCustomLevel()"
               title="Play your level"
             >
               &#x25B6;
@@ -215,10 +216,74 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "Sandbox",
   methods: {
-    loadCustomLevel: function() {},
+    ...mapActions(["postCustomGame"]),
+    playCustomLevel: function() {
+      let type = "Wall"
+      let value = -99
+      let pXPos = 0
+      let pYPos = 0
+      let dXPos = 0
+      let dYPos = 0
+
+      let fields = []
+
+      for (let x = 0; x < 10; x++) {
+        for (let y = 0; y < 10; y++) {
+          let kids = document.getElementById('imgHolder-${x}${y}').children;
+          let image = kids[0]
+          let uri = image.src.toString().split("/")
+          let source = uri[uri.length - 1]
+          let name = source.split(".")
+          let params = name[0].split("_")
+          if (params.length > 1) {
+            type = params[0]
+            console.log(type)
+            value = params[1]
+            console.log(value)
+            if (type === "Door") {
+              dXPos = x
+              dYPos = y
+            }
+          } else {
+            type = "Wall"
+            value = -99
+          }
+          fields.push({
+            fieldvalue: value,
+            fieldtype: type
+          })
+          if (params.length > 2) {
+            pXPos = x
+            pYPos = y
+          }
+        }
+      }
+      let levelObj = {
+        name: "customLevel",
+        size: 10,
+        PxPos: pXPos,
+        PyPos: pYPos,
+        DxPos: dXPos,
+        DyPos: dYPos,
+        WxPos: dXPos,
+        WyPos: dYPos + 1
+      }
+      let level = {
+        level: levelObj,
+        fields: fields
+      }
+      console.log(level);
+      this.postCustomGame({level});
+      this.$router.push("/game");
+    },
+    saveCustomLevel: function() {
+
+    },
     allowDrop: function(ev) {
       ev.preventDefault();
     },

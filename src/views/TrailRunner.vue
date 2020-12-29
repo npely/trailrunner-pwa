@@ -16,24 +16,6 @@
       </button>
       <button
         class="nav-button"
-        @click="redoMove()"
-        data-toggle="tooltip"
-        title="Redo your undone step"
-        type="submit"
-      >
-        &#x21B7;
-      </button>
-      <button
-        class="nav-button"
-        @click="undoMove()"
-        data-toggle="tooltip"
-        title="Undo your last step"
-        type="submit"
-      >
-        &#x21B6;
-      </button>
-      <button
-        class="nav-button"
         @click="$router.push('/')"
         data-toggle="tooltip"
         title="Go back to main menu"
@@ -69,19 +51,30 @@
 
 <script>
 import LevelMap from "@/components/LevelMap";
-import { mapActions } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 export default {
   name: "TrailRunner",
   components: { LevelMap },
   methods: {
-    ...mapActions(["makeMove"]),
+    ...mapActions(["makeMove", "switchHardcoreMode", "saveGame"]),
     walk: function(moveDirection) {
       this.makeMove({ moveDirection });
     },
-    switchHardcoreMode: function() {},
-    saveGame: function() {},
-    redoMove: function() {},
-    undoMove: function() {}
+    switchHardcoreMode: function() {
+      this.switchHardcoreMode();
+      let hardcoreButton = document.getElementById("hardcore-button");
+      if (this.hardcoreMode) {
+        hardcoreButton.text(String.fromCodePoint(parseInt("128128")))
+      } else {
+        hardcoreButton.text(String.fromCodePoint(parseInt("128124")))
+      }
+    },
+    saveGame: function() {
+      this.saveGame();
+    }
+  },
+  computed: {
+    ...mapGetters(["hardcoreMode"])
   }
 };
 </script>

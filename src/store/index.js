@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     levelMap: {},
     changedFields: {},
-    moveDirection: {}
+    moveDirection: {},
+    hardcoreMode: {},
   },
   getters: {
     levelMap: currentState => {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     moveDirection: currentState => {
       return currentState.moveDirection;
+    },
+    hardcoreMode: currentState => {
+      return currentState.hardcoreMode;
     }
   },
   actions: {
@@ -56,6 +60,36 @@ export default new Vuex.Store({
         console.log("Commit " + moveDirection);
         commit("changedFields", changedFields);
       });
+    },
+    async switchHardcoreMode({ commit }) {
+      await fetch(process.env.VUE_APP_BACKEND_BASE_URL + "/switchHardcoreMode", {
+        method: "GET",
+        credentials: "same-origin"
+      }).then(async function(response) {
+        const hardcoreMode = await response.json();
+        commit("hardcoreMode", hardcoreMode);
+      });
+    },
+    async saveGame() {
+      await fetch(process.env.VUE_APP_BACKEND_BASE_URL + "/save", {
+        method: "GET",
+        credentials: "same-origin"
+      });
+    },
+    async loadGame() {
+      await fetch(process.env.VUE_APP_BACKEND_BASE_URL + "/load", {
+        method: "GET",
+        credentials: "same-origin"
+      });
+    },
+    async postCustomGame({ commit }, { level }) {
+      await fetch(process.env.VUE_APP_BACKEND_BASE_URL + "/loadCustomGame", {
+        method: "POST",
+        credentials: "same-origin",
+        body: JSON.stringify(level)
+      }).then(async function() {
+        commit("levelMap", level);
+      });
     }
   },
   mutations: {
@@ -66,8 +100,10 @@ export default new Vuex.Store({
       state.changedFields = changedFields;
     },
     moveDirection(state, moveDirection) {
-      console.log("Mutation " + moveDirection);
       state.moveDirection = moveDirection;
+    },
+    hardcoreMode(state, hardcoreMode) {
+      state.hardcoreMode = hardcoreMode;
     }
   }
 });
