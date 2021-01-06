@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
+  <v-app id="app">
     <Header></Header>
     <div id="nav"></div>
     <router-view />
     <Footer></Footer>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -105,22 +105,11 @@ export default {
     end of menu-region
  */
 
-#Game-Description {
-  color: white;
-  font-family: "Press Start P2";
-  font-size: 1em;
-  width: fit-content;
-}
-
-#Rules {
-  background: rgba(34, 34, 34, 0.75);
-}
-
 li {
   margin: 0 0 15px 0;
 }
 
-body {
+#app {
   background-image: url("assets/images/background.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -128,33 +117,14 @@ body {
   background-size: cover;
 }
 
-#level-logo {
-  width: 30px;
-  height: 30px;
-}
-
-#level-name {
-  color: white;
-}
-
-.nav-button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 25px;
-}
-
-.nav-button:hover {
-  transform: translate(0px, 1px);
-}
-
-.nav-button:focus {
-  outline: none;
-}
-
 .control-panel {
   margin-top: 54px;
   float: top;
+}
+
+#level-logo {
+  width: 30px;
+  height: 30px;
 }
 
 .game-field {
@@ -173,51 +143,6 @@ body {
 
 .selector-row {
   margin-bottom: 25px;
-}
-
-#win-message {
-  display: block;
-  width: auto;
-  height: auto;
-  text-align: center;
-  font-size: 50px;
-  font-family: "Press Start P2";
-  color: yellow;
-  transform: rotateX(4deg);
-  letter-spacing: 0.1em;
-  user-select: none;
-  text-shadow: 0 -1px 0 #cfa60c, 0 1px 0 #ffd230, 0 2px 0 #facc25,
-    0 3px 0 #f7c81b, 0 4px 0 #e8bb15, 0 5px 0 #d9af14, 0 6px 0 #d6ac0f,
-    0 7px 0 #cfa60c, 0 8px 0 #c7a00c, 0 9px 0 #bf990a, 0 10px 0 #b38f09,
-    0 11px 0 #a68408, 0 12px 0 #9e7e08, 0 13px 0 #9e7e08, 0 14px 0 #9e7e08,
-    0 15px 0 #9e7e08;
-
-  transition: text-shadow 0.3s ease 0.3s, transform 0.3s ease 0.3s,
-    letter-spacing 0.3s ease 0.5s;
-}
-
-#lose-message {
-  display: block;
-  width: auto;
-  height: auto;
-  padding: 0;
-  text-align: center;
-  font-size: 50px;
-  font-family: "Press Start P2";
-  color: firebrick;
-  transform: rotateX(5deg);
-  letter-spacing: 0.1em;
-  user-select: none;
-  text-shadow: 0 -1px 0 #000, 0 1px 0 #8f130d, 0 2px 0 #82110c, 0 3px 0 #7d100b,
-    0 4px 0 #750f0b, 0 5px 0 #6e0e0a, 0 6px 0 #630d09, 0 7px 0 #5c0c08,
-    0 8px 0 #540b08, 0 9px 0 #4d0a07, 0 10px 0 #470906, 0 11px 0 #3b0805,
-    0 12px 0 #330704, 0 13px 0 #290603, 0 14px 0 #240502, 0 15px 0 #1c0402,
-    0 22px 30px #450603, 0 22px 30px #450603, 0 22px 15px #450603,
-    0 11px 15px #450603, 0 15px 20px #450603, 0 15px 11px #450603,
-    0 16px 11px #450603;
-
-  transition: text-shadow 0.3s ease 0.3s, transform 0.3s ease 0.3s,
-    letter-spacing 0.3s ease 0.3s;
 }
 
 #back-to-main {
@@ -243,10 +168,6 @@ body {
 
 .row {
   justify-content: center;
-}
-
-.container {
-  margin-top: 10%;
 }
 
 .message {

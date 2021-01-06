@@ -1,54 +1,58 @@
 <template>
-  <div class="container" id="game-container">
-    <div class="navbar justify-content-center">
+  <v-container id="game-container">
+    <v-row id="nav-button-group">
       <div>
         <img src="@/assets/images/Logo.png" id="level-logo" />
-        <a class="navbar-brand" id="level-name">&nbsp;</a>
       </div>
-      <button
+      <v-btn
+        text
         class="nav-button"
         @click="saveGame()"
         data-toggle="tooltip"
         title="Save the game"
       >
         &#x1F4BE;
-      </button>
-      <button
+      </v-btn>
+      <v-btn
+        text
         id="hardcore-button"
         class="nav-button"
+        data-toggle="tooltip"
+        title="Change the difficulty"
         @click="hardcoreModeToggle()"
       >
         &#x1f47c;
-      </button>
-      <button
+      </v-btn>
+      <v-btn
+        text
         class="nav-button"
         @click="$router.push('/')"
         data-toggle="tooltip"
         title="Go back to main menu"
       >
         &#x1F6AA;
-      </button>
-    </div>
+      </v-btn>
+    </v-row>
     <LevelMap></LevelMap>
-    <div id="move-button-group">
-      <div class="row">
-        <button class="move-button" @click="walk('up')">
+    <v-container id="move-button-group">
+      <v-row>
+        <v-btn text class="move-button" @click="walk('up')">
           &#x2191;
-        </button>
-      </div>
-      <div class="btn-group" role="group">
-        <button class="move-button" @click="walk('left')">
+        </v-btn>
+      </v-row>
+      <v-row id="lower-move-buttons">
+        <v-btn text class="move-button" @click="walk('left')">
           &#x2190;
-        </button>
-        <button class="move-button" @click="walk('down')">
+        </v-btn>
+        <v-btn text class="move-button" @click="walk('down')">
           &#x2193;
-        </button>
-        <button class="move-button" @click="walk('right')">
+        </v-btn>
+        <v-btn text class="move-button" @click="walk('right')">
           &#x2192;
-        </button>
-      </div>
-    </div>
-  </div>
+        </v-btn>
+      </v-row>
+    </v-container>
+  </v-container>
 </template>
 
 <script>
@@ -64,8 +68,6 @@ export default {
     },
     hardcoreModeToggle: function() {
       this.switchHardcoreMode();
-      console.log("switch Hardcore Mode");
-      console.log(this.hardcoreMode);
       let hardcoreButton = document.getElementById("hardcore-button");
       if (this.hardcoreMode.hardcoreMode) {
         hardcoreButton.innerHTML = String.fromCodePoint(parseInt("128128"));
@@ -84,12 +86,39 @@ export default {
 </script>
 
 <style scoped>
+#game-container {
+  padding-top: 200px;
+}
+
+#nav-button-group {
+  padding-bottom: 10px;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 25px;
+}
+
+.nav-button:hover {
+  transform: translate(0px, 1px);
+}
+
+.nav-button:focus {
+  outline: none;
+}
+
+#lower-move-buttons {
+  padding-top: 15px;
+}
+
 .move-button {
   color: white;
   border: 3px solid white;
   text-shadow: none;
   font-size: 30px;
-  background: rgba(34, 34, 34, 0.75);
+  backgroundcolor: rgba(34, 34, 64, 0.75);
   text-align: center;
   width: fit-content;
   text-shadow: 0 -1px 0 #000, 0 1px 0 #999999, 0 2px 0 #888888, 0 3px 0 #777777,
@@ -103,7 +132,7 @@ export default {
 #move-button-group {
   text-align: center;
   font-family: "Press Start P2", serif;
-  padding-top: 20px;
+  padding-top: 30px;
   margin: auto;
 }
 </style>

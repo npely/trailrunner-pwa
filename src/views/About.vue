@@ -44,3 +44,16 @@
 </template>
 
 <script></script>
+
+<style scoped>
+#Game-Description {
+  color: white;
+  font-family: "Press Start P2";
+  font-size: 1em;
+  width: fit-content;
+}
+
+#Rules {
+  background: rgba(34, 34, 34, 0.75);
+}
+</style>

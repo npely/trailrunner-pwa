@@ -1,35 +1,37 @@
 <template>
-  <body>
-    <nav class="navbar navbar-inverse sandbox-nav">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <div>
-            <img src="@/assets/images/Logo.png" id="level-logo" />
-            <a class="navbar-brand" id="level-name">&nbsp;Sandbox</a>
-          </div>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-          <div class="row">
-            <button
-              class="nav-button"
-              data-toggle="tooltip"
-              @click="saveCustomLevel()"
-              title="Save your level"
-            >
-              &#x1F4BE;
-            </button>
-            <button
-              class="nav-button"
-              data-toggle="tooltip"
-              @click="playCustomLevel()"
-              title="Play your level"
-            >
-              &#x25B6;
-            </button>
-          </div>
-        </ul>
+  <v-container id="sandbox-container">
+    <v-row>
+      <div>
+        <img src="@/assets/images/Logo.png" id="level-logo" />
       </div>
-    </nav>
+      <v-btn
+        text
+        class="nav-button"
+        data-toggle="tooltip"
+        @click="saveCustomLevel()"
+        title="Save your level"
+      >
+        &#x1F4BE;
+      </v-btn>
+      <v-btn
+        text
+        class="nav-button"
+        data-toggle="tooltip"
+        @click="playCustomLevel()"
+        title="Play your level"
+      >
+        &#x25B6;
+      </v-btn>
+      <v-btn
+        text
+        class="nav-button"
+        @click="$router.push('/')"
+        data-toggle="tooltip"
+        title="Go back to main menu"
+      >
+        &#x1F6AA;
+      </v-btn>
+    </v-row>
     <div class="row">
       <div class="col-6">
         <div class="container" align="right">
@@ -212,7 +214,7 @@
         </div>
       </div>
     </div>
-  </body>
+  </v-container>
 </template>
 
 <script>
@@ -342,4 +344,23 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#sandbox-container {
+  padding-top: 200px;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 25px;
+}
+
+.nav-button:hover {
+  transform: translate(0px, 1px);
+}
+
+.nav-button:focus {
+  outline: none;
+}
+</style>

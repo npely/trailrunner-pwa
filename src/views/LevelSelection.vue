@@ -1,38 +1,51 @@
 <template>
-  <div class="container">
-    <div id="level-selection-button-group" class="message">
-      <div class="row"></div>
-      <div class="row">
-        <button class="menu-button" @click="executeFetchLevel(1)" type="submit">
-          Level 1
-        </button>
-      </div>
-      <div class="row">
-        <button class="menu-button" @click="executeFetchLevel(2)" type="submit">
-          Level 2
-        </button>
-      </div>
-      <div class="row">
-        <button class="menu-button" @click="executeFetchLevel(3)" type="submit">
-          Level 3
-        </button>
-      </div>
-      <div class="row">
-        <button class="menu-button" @click="executeFetchLevel(4)" type="submit">
-          Level 4
-        </button>
-      </div>
-      <div class="row">
-        <button
-          class="menu-button-blue"
-          @click="executeFetchLevel(5)"
-          type="submit"
-        >
-          Level 5
-        </button>
-      </div>
-    </div>
-  </div>
+  <v-container id="level-selection-button-group" class="message">
+    <v-row>
+      <button
+        class="menu-button"
+        id="selectLevel1"
+        @click="executeFetchLevel(1)"
+      >
+        Level 1
+      </button>
+    </v-row>
+    <v-row>
+      <button
+        class="menu-button"
+        id="selectLevel2"
+        @click="executeFetchLevel(2)"
+      >
+        Level 2
+      </button>
+    </v-row>
+    <v-row>
+      <button
+        class="menu-button"
+        id="selectLevel3"
+        @click="executeFetchLevel(3)"
+      >
+        Level 3
+      </button>
+    </v-row>
+    <v-row>
+      <button
+        class="menu-button"
+        id="selectLevel4"
+        @click="executeFetchLevel(4)"
+      >
+        Level 4
+      </button>
+    </v-row>
+    <v-row>
+      <button
+        class="menu-button-blue"
+        id="selectLevel5"
+        @click="executeFetchLevel(5)"
+      >
+        Level 5
+      </button>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

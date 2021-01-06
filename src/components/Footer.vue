@@ -1,21 +1,25 @@
 <template>
-  <div class="footer">
-    <div class="footer-item">
-      More information about
-      <a href="https://github.com/npely/TrailRunner" target="_blank">
-        TrailRunner Game
-      </a>
-    </div>
-    <div class="footer-item">
-      More information about
-      <a
-        href="https://github.com/npely/trailrunner-play-server"
-        target="_blank"
-      >
-        TrailRunner Server
-      </a>
-    </div>
-  </div>
+  <v-footer dark absolute padless>
+    <v-card class="flex" height="50">
+      <v-card-text class="text-center">
+        <span>
+          More information about
+          <a href="https://github.com/npely/TrailRunner" target="_blank">
+            TrailRunner Game
+          </a>
+        </span>
+        <span>
+          More information about
+          <a
+            href="https://github.com/npely/trailrunner-play-server"
+            target="_blank"
+          >
+            TrailRunner Server
+          </a>
+        </span>
+      </v-card-text>
+    </v-card>
+  </v-footer>
 </template>
 
 <script>
