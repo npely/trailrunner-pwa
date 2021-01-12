@@ -1,7 +1,10 @@
 import { createLocalVue, shallowMount } from "@vue/test-utils";
+import Vue from "vue";
 import Vuex from "vuex";
 import Vuetify from "vuetify";
 import LevelSelection from "../../../src/views/LevelSelection.vue";
+
+Vue.use(Vuetify);
 
 const localVue = createLocalVue();
 
@@ -26,11 +29,6 @@ describe("LevelSelection.vue", () => {
       actions,
       getters
     });
-  });
-
-  it("is a Vue instance", () => {
-    const wrapper = shallowMount(LevelSelection, { store, localVue });
-    expect(wrapper.isVueInstance()).toBeTruthy();
   });
 
   it("should call executeFetchLevel when clicking a button", () => {

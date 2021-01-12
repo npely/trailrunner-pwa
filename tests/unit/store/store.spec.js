@@ -15,21 +15,21 @@ describe("mutations", () => {
     const testChangedFields = { test: "fields" };
     const state = { changedFields: {} };
     changedFields(state, testChangedFields);
-    expect(state.levelMap).toBe(testChangedFields);
+    expect(state.changedFields).toBe(testChangedFields);
   });
 
   it("should set the moveDirection", () => {
     const testMoveDirection = { test: "move direction" };
     const state = { moveDirection: {} };
     moveDirection(state, testMoveDirection);
-    expect(state.levelMap).toBe(testMoveDirection);
+    expect(state.moveDirection).toBe(testMoveDirection);
   });
 
   it("should set the hardcoreMode", () => {
     const testHardcoreMode = true;
     const state = { hardcoreMode: false };
     hardcoreMode(state, testHardcoreMode);
-    expect(state.levelMap).toBe(testHardcoreMode);
+    expect(state.hardcoreMode).toBe(testHardcoreMode);
   });
 });
 
